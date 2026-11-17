@@ -41,10 +41,10 @@ export function WeekTimeline({ curriculum, starts, actualWeek, planWeek }: WeekT
                       <div
                         title={`Minggu ${w}`}
                         className={cn(
-                          "key-shape h-full transition-colors",
+                          "key-shape h-full border-2 border-ink transition-colors",
                           w < actualWeek && "bg-ink",
-                          w === actualWeek && "bg-oxblood",
-                          w > actualWeek && "bg-panel group-hover:bg-[#e6e3e3]",
+                          w === actualWeek && "bg-lit",
+                          w > actualWeek && "bg-white group-hover:bg-hi",
                         )}
                       />
                     </div>
@@ -67,17 +67,17 @@ export function WeekTimeline({ curriculum, starts, actualWeek, planWeek }: WeekT
       </div>
       <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-muted-foreground">
         <li className="flex items-center gap-1.5">
-          <span className="key-shape inline-block h-3 w-2 bg-ink" /> Sudah lewat
+          <span className="key-shape inline-block h-3 w-2 border border-ink bg-ink" /> Sudah lewat
         </li>
         <li className="flex items-center gap-1.5">
-          <span className="key-shape inline-block h-3 w-2 bg-oxblood" /> Minggu ini
+          <span className="key-shape inline-block h-3 w-2 border border-ink bg-lit" /> Minggu ini
         </li>
         {planWeek !== actualWeek && (
           <li className="flex items-center gap-1.5">
-            <span className="inline-block h-2 w-px bg-oxblood" /> Menurut kalender: minggu {planWeek}
+            <span className="inline-block h-2 w-px bg-oxblood" /> Jadwal: minggu {planWeek}
           </li>
         )}
-        <li>Angka di bawah: nomor level</li>
+        <li>Angka di bawah = nomor level</li>
       </ul>
     </div>
   );

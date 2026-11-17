@@ -11,6 +11,7 @@ export function KeyBandArt({
   white = "var(--paper-2)",
   black = "var(--oxblood)",
   label = "Deret tuts piano",
+  stroke = "var(--ink)",
 }: {
   from?: string;
   to?: string;
@@ -18,6 +19,7 @@ export function KeyBandArt({
   white?: string;
   black?: string;
   label?: string;
+  stroke?: string;
 }) {
   const keys: { black: boolean }[] = [];
   for (let m = toMidi(from); m <= toMidi(to); m++) keys.push({ black: midiToPitch(m).includes("#") });
@@ -30,11 +32,11 @@ export function KeyBandArt({
   const blacks: React.ReactNode[] = [];
   keys.forEach((k, i) => {
     if (!k.black) {
-      rects.push(<path key={i} d={keyPath(wi * W, W - gap, H, 18)} fill={white} />);
+      rects.push(<path key={i} d={keyPath(wi * W, W - gap, H, 18)} fill={white} stroke={stroke} strokeWidth={6} />);
       wi++;
     } else {
       const bw = W * 0.56;
-      blacks.push(<path key={i} d={keyPath(wi * W - bw / 2 - gap / 2, bw, H * 0.62, 14)} fill={black} />);
+      blacks.push(<path key={i} d={keyPath(wi * W - bw / 2 - gap / 2, bw, H * 0.62, 14)} fill={black} stroke={stroke} strokeWidth={6} />);
     }
   });
   return (

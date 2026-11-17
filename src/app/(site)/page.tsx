@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/site/site-footer";
 
 export default function Home() {
   return (
-    <div className="bg-paper text-oxblood">
+    <div className="dotted text-ink">
       <main>
         <Hero />
         <LevelList />

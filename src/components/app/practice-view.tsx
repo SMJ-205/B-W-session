@@ -45,21 +45,21 @@ export function PracticeView() {
           </Link>{" "}
           / Latihan harian
         </p>
-        <h1 className="mt-2 text-[24px] leading-tight font-semibold text-ink md:text-[30px]">{current.drill.title}</h1>
+        <h1 className="mt-2 text-[26px] leading-tight font-bold text-ink md:text-[32px]">{current.drill.title}</h1>
         <p className="mt-2 text-[17px] leading-relaxed text-ink">
           {d.todayEntry ? (
-            <>Latihan hari ini sudah tercatat di {d.todayEntry.bpm} BPM. Ulangi kapan saja; catatan terakhir yang disimpan.</>
+            <>Latihan hari ini sudah tercatat di {d.todayEntry.bpm} BPM. Mau main lagi? Boleh! Catatan terakhir yang disimpan.</>
           ) : (
             <>
-              Mainkan sampai tidak ada not yang tersendat di {d.bpmToday} BPM, lalu catat. Tempo naik sedikit di
-              setiap sesi sampai {current.drill.bpm_goal} BPM.
+              Tekan Play untuk mendengarkan dulu, lalu ikuti di piano. Mainkan sampai lancar di {d.bpmToday} BPM,
+              lalu tekan Selesai. Besok temponya naik sedikit, sampai {current.drill.bpm_goal} BPM.
             </>
           )}
         </p>
       </header>
 
       <div className="mt-6 grid gap-4 md:mt-10 lg:grid-cols-12">
-        <section data-reveal className="-mx-4 min-w-0 border-y border-border bg-white px-4 py-5 sm:mx-0 sm:rounded-xl sm:border sm:p-5 lg:col-span-9">
+        <section data-reveal className="-mx-4 border-y-[2.5px] border-ink bg-white px-4 py-5 sm:mx-0 sm:sticker sm:p-5 min-w-0 lg:col-span-9">
           <h2 className="sr-only">Partitur latihan</h2>
           <NotationPlayer
             key={`${current.id}-${d.bpmToday}`}
@@ -71,27 +71,27 @@ export function PracticeView() {
         </section>
 
         <aside className="flex flex-col gap-4 lg:col-span-3">
-          <section data-reveal className="hidden rounded-xl bg-panel p-5 md:block">
-            <h2 className="mb-4 text-[14px] font-semibold text-ink">Catat latihan</h2>
+          <section data-reveal className="sticker hidden p-5 md:block">
+            <h2 className="mb-4 text-[17px] font-bold text-ink">Catat latihan</h2>
             <p className="tabular text-[28px] leading-tight text-ink">{playedBpm} BPM</p>
             <p className="mt-1 text-[13px] text-muted-foreground">
-              {bpm ? "Tempo putaran terakhir" : "Tempo yang disarankan hari ini"}
+              {bpm ? "Tempo yang barusan kamu mainkan" : "Tempo untuk hari ini"}
             </p>
             <Button onClick={save} disabled={saving} size="lg" className="mt-5 w-full">
               {d.todayEntry ? <Check /> : null}
-              {saving ? "Menyimpan…" : d.todayEntry ? "Perbarui catatan" : "Selesai latihan hari ini"}
+              {saving ? "Menyimpan…" : d.todayEntry ? "Simpan lagi" : "Selesai latihan hari ini"}
             </Button>
             {error && <p className="mt-2 text-[13px] text-destructive">{error}</p>}
           </section>
 
-          <section data-reveal className="rounded-xl bg-panel p-5">
-            <h2 className="mb-4 text-[14px] font-semibold text-ink">Pekan ini</h2>
+          <section data-reveal className="sticker p-5">
+            <h2 className="mb-4 text-[17px] font-bold text-ink">Pekan ini</h2>
             <WeekStrip practice={state.practice} today={state.today} />
           </section>
 
-          <section data-reveal className="rounded-xl bg-panel p-5">
-            <h2 className="mb-3 text-[14px] font-semibold text-ink">Target minggu ini</h2>
-            <p className="font-serif text-[16px] leading-[1.5] text-ink">{current.weekly_targets[d.week - 1]}</p>
+          <section data-reveal className="sticker p-5">
+            <h2 className="mb-3 text-[17px] font-bold text-ink">Misi minggu ini</h2>
+            <p className="text-[16px] leading-[1.5] text-ink">{current.weekly_targets[d.week - 1]}</p>
           </section>
         </aside>
       </div>
@@ -106,7 +106,7 @@ export function PracticeView() {
         </div>
         <Button onClick={save} disabled={saving} size="lg" className="shrink-0">
           {d.todayEntry ? <Check /> : null}
-          {saving ? "Menyimpan…" : d.todayEntry ? "Perbarui" : "Selesai latihan"}
+          {saving ? "Menyimpan…" : d.todayEntry ? "Simpan lagi" : "Selesai!"}
         </Button>
       </MobileActionBar>
     </div>

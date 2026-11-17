@@ -30,10 +30,10 @@ export function LessonView({ params }: { params: Promise<{ id: string }> }) {
 
   if (!d.unlocked.has(mod.id)) {
     return shell(
-      <div className="max-w-[640px] rounded-xl bg-panel p-6">
-        <h1 className="text-[22px] font-semibold text-ink">Level {mod.level} masih terkunci</h1>
+      <div className="sticker max-w-[640px] p-6">
+        <h1 className="text-[24px] font-bold text-ink">Level {mod.level} masih terkunci</h1>
         <p className="mt-2 text-[17px] leading-relaxed text-ink">
-          Selesaikan semua pelajaran dan kuis di Level {mod.level - 1} untuk membukanya.
+          Selesaikan dulu semua pelajaran dan kuis di Level {mod.level - 1}, nanti level ini terbuka.
         </p>
         <Link href="/peta" className="mt-4 inline-block text-[15px] text-oxblood underline underline-offset-4">
           Buka peta level
@@ -70,15 +70,15 @@ export function LessonView({ params }: { params: Promise<{ id: string }> }) {
           </Link>{" "}
           / Minggu {start + lesson.week - 1}
         </p>
-        <h1 className="mt-2 text-[24px] leading-tight font-semibold text-ink md:text-[30px]">{lesson.title}</h1>
+        <h1 className="mt-2 text-[26px] leading-tight font-bold text-ink md:text-[32px]">{lesson.title}</h1>
         {lesson.body && (
-          <p className="mt-3 max-w-[68ch] font-serif text-[18px] leading-[1.6] text-ink">{lesson.body}</p>
+          <p className="mt-3 max-w-[60ch] text-[18px] leading-[1.6] text-ink">{lesson.body}</p>
         )}
       </header>
 
       <div data-reveal className="mt-6 md:mt-8">
         {lesson.content_type === "interactive_sheet" && lesson.notation_data && (
-          <section className="-mx-4 border-y border-border bg-white px-4 py-5 sm:mx-0 sm:rounded-xl sm:border sm:p-5">
+          <section className="-mx-4 border-y-[2.5px] border-ink bg-white px-4 py-5 sm:mx-0 sm:sticker sm:p-5">
             <h2 className="sr-only">Partitur</h2>
             <NotationPlayer
               notation={lesson.notation_data}
@@ -89,16 +89,16 @@ export function LessonView({ params }: { params: Promise<{ id: string }> }) {
         )}
 
         {lesson.content_type === "text" && (
-          <section className="-mx-4 border-y border-border bg-white px-4 py-5 sm:mx-0 sm:rounded-xl sm:border sm:p-5">
-            <h2 className="mb-4 text-[14px] font-semibold text-ink">Coba di keyboard</h2>
+          <section className="-mx-4 border-y-[2.5px] border-ink bg-white px-4 py-5 sm:mx-0 sm:sticker sm:p-5">
+            <h2 className="mb-4 text-[17px] font-bold text-ink">Coba di piano ini</h2>
             <VirtualKeyboard />
           </section>
         )}
 
         {lesson.content_type === "quiz" && lesson.quiz && (
-          <section className="-mx-4 max-w-[820px] bg-panel px-4 py-5 sm:mx-0 sm:rounded-xl sm:p-5 md:p-6">
-            <h2 className="mb-5 text-[14px] font-semibold text-ink">
-              {lesson.quiz.length} pertanyaan; semua harus benar untuk lulus
+          <section className="-mx-4 border-y-[2.5px] border-ink bg-white px-4 py-5 sm:mx-0 sm:sticker sm:p-5 max-w-[820px] md:p-6">
+            <h2 className="mb-5 text-[17px] font-bold text-ink">
+              {lesson.quiz.length} pertanyaan. Jawab semuanya dengan benar untuk lulus.
             </h2>
             <Quiz questions={lesson.quiz} passed={done} onPassed={complete} />
           </section>
@@ -115,7 +115,7 @@ export function LessonView({ params }: { params: Promise<{ id: string }> }) {
             ) : saving ? (
               "Menyimpan…"
             ) : (
-              "Tandai selesai"
+              "Sudah bisa!"
             )}
           </Button>
         );

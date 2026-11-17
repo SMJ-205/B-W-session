@@ -18,8 +18,8 @@ interface SheetMusicProps {
   className?: string;
 }
 
-const ACTIVE_COLOR = "#7d0c14"; // oxblood
-const INK_COLOR = "#1f1416";
+const ACTIVE_COLOR = "#8f8f8f"; // abu sorotan
+const INK_COLOR = "#111111";
 
 /** Ketukan (dalam quarter note) per birama, mis. "3/4" -> 3, "6/8" -> 3. */
 function beatsPerMeasure(timeSignature: string): number {

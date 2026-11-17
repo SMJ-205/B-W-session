@@ -21,10 +21,10 @@ export function MapView() {
   return (
     <div className="mx-auto max-w-[1100px] px-4 pt-8 pb-20 sm:px-6 md:pt-[72px]">
       <header data-reveal className="max-w-[820px]">
-        <h1 className="text-[24px] leading-tight font-semibold text-ink md:text-[30px]">Peta level</h1>
+        <h1 className="text-[26px] leading-tight font-bold text-ink md:text-[32px]">Peta level</h1>
         <p className="mt-2 text-[17px] leading-relaxed text-ink">
-          12 level dalam {d.total} minggu. Level berikutnya terbuka setelah semua pelajaran dan kuis di level
-          sebelumnya selesai.
+          Ada 12 level, totalnya {d.total} minggu. Selesaikan semua pelajaran dan kuis di satu level, lalu level
+          berikutnya terbuka. Gembok berarti level itu belum terbuka.
         </p>
       </header>
 
@@ -32,7 +32,7 @@ export function MapView() {
         {tiers.map(({ name, modules }) => (
           <section key={name} aria-labelledby={`tier-${name}`}>
             <div className="mb-3 flex items-baseline justify-between">
-              <h2 id={`tier-${name}`} className="text-[18px] font-semibold text-ink">
+              <h2 id={`tier-${name}`} className="text-[20px] font-bold text-ink">
                 {name}
               </h2>
               <span className="tabular text-[13px] text-muted-foreground">
@@ -52,16 +52,20 @@ export function MapView() {
                     id={`level-${m.level}`}
                     data-reveal
                     className={cn(
-                      "scroll-mt-16 rounded-xl p-4 sm:p-5",
-                      isCurrent ? "border border-oxblood/30 bg-white" : "bg-panel",
+                      "sticker scroll-mt-16 p-4 sm:p-5",
+                      !open && "opacity-75",
                     )}
                   >
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <h3 className="text-[17px] font-semibold text-ink">
+                      <h3 className="text-[18px] font-bold text-ink">
                         {m.level}. {m.title}
                       </h3>
                       {!open && <Lock className="size-3.5 text-muted-foreground" aria-label="Terkunci" />}
-                      {isCurrent && <span className="text-[13px] font-medium text-oxblood">Sedang berjalan</span>}
+                      {isCurrent && (
+                        <span className="rounded-full border-2 border-ink bg-hi px-2.5 py-0.5 text-[12px] font-bold text-ink">
+                          Sedang berjalan
+                        </span>
+                      )}
                       <span className="tabular basis-full text-[13px] text-muted-foreground sm:ml-auto sm:basis-auto">
                         Minggu {start}
                         {end > start && ` sampai ${end}`} · {m.daily_minutes} menit sehari · {done}/{m.lessons.length}{" "}
@@ -72,7 +76,7 @@ export function MapView() {
 
                     <div className="mt-4 grid gap-6 md:grid-cols-2">
                       <div>
-                        <h4 className="mb-2 text-[13px] text-muted-foreground">Target mingguan</h4>
+                        <h4 className="mb-2 text-[13px] font-bold text-muted-foreground">Misi tiap minggu</h4>
                         <ol className="space-y-2">
                           {m.weekly_targets.map((t, i) => (
                             <li key={i} className="flex gap-3 text-[15px] leading-snug text-ink">
@@ -83,7 +87,7 @@ export function MapView() {
                         </ol>
                       </div>
                       <div>
-                        <h4 className="mb-2 text-[13px] text-muted-foreground">Pelajaran</h4>
+                        <h4 className="mb-2 text-[13px] font-bold text-muted-foreground">Pelajaran</h4>
                         <ul className="space-y-1">
                           {m.lessons.map((l) => {
                             const lessonDone = state.completed.has(l.id);
@@ -92,7 +96,7 @@ export function MapView() {
                                 {lessonDone ? (
                                   <Check className="size-4 shrink-0 text-ink" aria-label="Selesai" />
                                 ) : (
-                                  <span className="key-shape inline-block h-4 w-2.5 shrink-0 bg-[#d6d2d2]" aria-hidden="true" />
+                                  <span className="inline-block size-4 shrink-0 rounded-[5px] border-2 border-ink bg-white" aria-hidden="true" />
                                 )}
                                 <span className="flex-1">{l.title}</span>
                                 {l.content_type === "quiz" && <span className="text-[13px] text-muted-foreground">Kuis</span>}
@@ -103,7 +107,7 @@ export function MapView() {
                                 {open ? (
                                   <Link
                                     href={`/lessons/${l.id}`}
-                                    className="flex min-h-11 items-center gap-2.5 rounded-md px-2 py-1.5 text-[15px] text-ink hover:bg-[#e6e3e3] active:bg-[#e6e3e3]"
+                                    className="flex min-h-11 items-center gap-2.5 rounded-[12px] px-2 py-1.5 text-[15px] text-ink hover:bg-hi active:bg-hi"
                                   >
                                     {row}
                                   </Link>

@@ -34,7 +34,7 @@ function SideNav() {
   return (
     <WithPathname>
       {(pathname) => (
-        <ul className="space-y-0.5">
+        <ul className="space-y-1.5">
           {NAV.map(({ href, label, icon: Icon }) => {
             const active = isActive(pathname, href);
             return (
@@ -43,10 +43,10 @@ function SideNav() {
                   href={href}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "flex h-9 items-center gap-2.5 rounded-md px-2.5 text-[15px] transition-colors",
+                    "flex h-11 items-center gap-2.5 rounded-[14px] border-2 px-3 text-[15px] font-bold transition-colors",
                     active
-                      ? "bg-[#d9d6d6] font-medium text-ink"
-                      : "text-muted-foreground hover:bg-[#dedbdb] hover:text-ink",
+                      ? "border-ink bg-white text-ink shadow-[3px_3px_0_var(--ink)]"
+                      : "border-transparent text-muted-foreground hover:bg-white/70 hover:text-ink",
                   )}
                 >
                   <Icon className="size-4" aria-hidden="true" />
@@ -66,7 +66,7 @@ function TabBar() {
   return (
     <nav
       aria-label="Navigasi utama"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-[#dcd8d8] bg-chrome pb-[env(safe-area-inset-bottom)] md:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t-[2.5px] border-ink bg-white pb-[env(safe-area-inset-bottom)] md:hidden"
     >
       <WithPathname>
         {(pathname) => (
@@ -79,14 +79,14 @@ function TabBar() {
                     href={href}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "flex h-full touch-manipulation flex-col items-center justify-center gap-1 text-[12px] transition-colors active:bg-[#dedbdb]",
-                      active ? "font-semibold text-ink" : "text-muted-foreground",
+                      "flex h-full touch-manipulation flex-col items-center justify-center gap-1 text-[12px] font-bold transition-colors",
+                      active ? "text-ink" : "text-muted-foreground",
                     )}
                   >
                     <span
                       className={cn(
-                        "flex h-7 w-14 items-center justify-center rounded-full transition-colors",
-                        active && "bg-[#d9d6d6]",
+                        "flex h-7 w-14 items-center justify-center rounded-full border-2 transition-colors",
+                        active ? "border-ink bg-hi" : "border-transparent",
                       )}
                     >
                       <Icon className="size-5" aria-hidden="true" />
@@ -105,8 +105,8 @@ function TabBar() {
 
 function Wordmark() {
   return (
-    <Link href="/" className="flex items-center gap-2 text-[15px] font-semibold text-ink">
-      <BrandMark className="size-8 text-oxblood" />
+    <Link href="/" className="flex items-center gap-2 text-[16px] font-bold text-ink">
+      <BrandMark className="size-9 text-ink" />
       Notes of Nopia
     </Link>
   );
@@ -118,7 +118,7 @@ function Wordmark() {
  */
 export function MobileActionBar({ children }: { children: ReactNode }) {
   return (
-    <div className="fixed inset-x-0 bottom-[calc(4rem+env(safe-area-inset-bottom))] z-30 flex items-center gap-3 border-t border-[#e6e3e3] bg-white px-4 py-3 md:hidden">
+    <div className="fixed inset-x-0 bottom-[calc(4rem+env(safe-area-inset-bottom))] z-30 flex items-center gap-3 border-t-[2.5px] border-ink bg-white px-4 py-3 md:hidden">
       {children}
     </div>
   );
@@ -132,29 +132,29 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [accountOpen, setAccountOpen] = useState(false);
 
   return (
-    <div className="min-h-svh bg-chrome">
+    <div className="dotted min-h-svh">
       {/* Ponsel: bar atas */}
-      <header className="sticky top-0 z-30 flex h-12 items-center justify-between bg-chrome px-4 md:hidden">
+      <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b-[2.5px] border-ink bg-white px-4 md:hidden">
         <Wordmark />
         <button
           type="button"
           onClick={() => setAccountOpen((v) => !v)}
           aria-expanded={accountOpen}
           aria-label={accountOpen ? "Tutup akun" : "Akun"}
-          className="-mr-2 flex size-11 touch-manipulation items-center justify-center rounded-md text-ink active:bg-[#dedbdb]"
+          className="press flex size-10 touch-manipulation items-center justify-center rounded-[12px] border-2 border-ink bg-white text-ink shadow-[2px_2px_0_var(--ink)]"
         >
           {accountOpen ? <X className="size-5" /> : <UserRound className="size-5" />}
         </button>
       </header>
       {accountOpen && (
-        <div className="fixed inset-x-0 top-12 z-30 border-b border-[#dcd8d8] bg-chrome px-5 pt-2 pb-5 text-[16px] md:hidden">
+        <div className="fixed inset-x-0 top-14 z-30 border-b-[2.5px] border-ink bg-white px-5 pt-3 pb-5 text-[16px] md:hidden">
           <AuthButton />
         </div>
       )}
 
       <div className="flex">
         {/* Desktop: sidebar di atas warna bingkai */}
-        <aside className="sticky top-0 hidden h-svh w-[228px] shrink-0 flex-col px-3 pt-4 pb-5 md:flex">
+        <aside className="sticky top-0 hidden h-svh w-[236px] shrink-0 flex-col px-4 pt-5 pb-5 md:flex">
           <div className="px-2.5 pb-6">
             <Wordmark />
           </div>
@@ -166,7 +166,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         </aside>
 
-        <main className="min-h-svh min-w-0 flex-1 bg-white pb-[calc(4rem+env(safe-area-inset-bottom))] md:my-2 md:mr-2 md:min-h-[calc(100svh-16px)] md:rounded-xl md:border md:border-[#e4e1e1] md:pb-0">
+        <main className="min-h-svh min-w-0 flex-1 pb-[calc(4rem+env(safe-area-inset-bottom))] md:pb-0">
           {children}
         </main>
       </div>

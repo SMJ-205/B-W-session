@@ -34,16 +34,16 @@ export function TempoShowcase() {
   return (
     <section
       className={cn(
-        "relative mt-[clamp(88px,14vw,220px)] overflow-hidden px-4 pt-12 transition-colors duration-500 md:px-12 md:pt-16",
-        fast ? "bg-oxblood text-paper" : "bg-paper-2 text-oxblood",
+        "relative mx-3 mt-[clamp(88px,14vw,220px)] overflow-hidden rounded-[24px] border-[2.5px] border-ink px-5 pt-10 shadow-[4px_4px_0_var(--ink)] transition-colors duration-500 sm:mx-4 md:mx-12 md:px-12 md:pt-14",
+        fast ? "bg-ink text-white" : "dotted text-ink",
       )}
     >
       <h2 className="text-[clamp(1.75rem,1.2rem+1.6vw,2.5rem)] leading-tight font-bold tracking-[-0.03em]">
         Hari ini {bpm} BPM, {fast ? "cepat" : "pelan"}.
       </h2>
-      <p className="mt-3 max-w-[44ch] font-serif text-[17px] leading-[1.55]">
-        Latihan scale C mayor di Level 6 mulai dari {L6.drill.bpm_start} BPM dan naik sampai{" "}
-        {L6.drill.bpm_goal} BPM dalam empat minggu. Geser temponya, lalu dengarkan.
+      <p className="mt-3 max-w-[44ch] text-[17px] leading-[1.55]">
+        Latihan scale C mayor di Level 6 mulai dari {L6.drill.bpm_start} BPM, lalu naik sampai{" "}
+        {L6.drill.bpm_goal} BPM dalam empat minggu. Coba geser temponya, lalu dengarkan bedanya!
       </p>
 
       {/* Kontrol asli dalam satuan em, dibesarkan lewat font-size */}
@@ -54,7 +54,7 @@ export function TempoShowcase() {
         <div
           className={cn(
             "flex w-full flex-col gap-[0.5em] rounded-[0.35em] p-[0.6em] md:w-[14em]",
-            fast ? "bg-paper text-oxblood" : "bg-white text-ink",
+            "border-[2.5px] border-ink bg-white text-ink shadow-[4px_4px_0_var(--ink)]",
           )}
         >
           <div className="flex items-baseline justify-between">
@@ -79,8 +79,8 @@ export function TempoShowcase() {
             type="button"
             onClick={toggle}
             className={cn(
-              "key-shape flex h-[1.4em] touch-manipulation items-center justify-center gap-[0.25em] text-[0.5em] font-semibold transition-colors max-md:h-11 max-md:text-[16px]",
-              fast ? "bg-oxblood text-paper hover:bg-[#5e0910]" : "bg-ink text-white hover:bg-[#3a2a2d]",
+              "press flex h-[1.4em] touch-manipulation rounded-[0.3em] border-2 border-ink items-center justify-center gap-[0.25em] text-[0.5em] font-semibold transition-colors max-md:h-11 max-md:text-[16px]",
+              "bg-ink text-white shadow-[2px_2px_0_var(--ink)]",
             )}
           >
             {playing ? <Pause className="size-[0.8em]" /> : <Play className="size-[0.8em]" />}

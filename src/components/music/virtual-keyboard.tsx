@@ -120,8 +120,9 @@ export function VirtualKeyboard({
                 onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && triggerRef.current(k.midi)}
                 style={{ left: `${left}%`, width: `calc(${100 / whiteCount}% - 3px)` }}
                 className={cn(
-                  "key-shape absolute top-0 flex h-full touch-manipulation items-end justify-center pb-2 text-[13px] transition-colors duration-100",
-                  lit ? "bg-oxblood text-paper" : "bg-panel text-muted-foreground hover:bg-[#e9e7e7]",
+                  "key-shape absolute top-0 flex h-full touch-manipulation items-end justify-center pb-2 text-[13px] font-bold transition-colors duration-100",
+                  "border-2 border-ink",
+                  lit ? "bg-lit text-white" : "bg-white text-muted-foreground hover:bg-hi",
                 )}
               >
                 {showLabels && k.pitch}
@@ -140,7 +141,7 @@ export function VirtualKeyboard({
               style={{ left: `${left}%`, width: `${(100 / whiteCount) * 0.6}%` }}
               className={cn(
                 "key-shape absolute top-0 z-10 h-[60%] touch-manipulation transition-colors duration-100",
-                lit ? "bg-oxblood" : "bg-ink hover:bg-[#3a2a2d]",
+                lit ? "bg-lit" : "bg-ink hover:bg-[#3a3a3a]",
               )}
             />
           );

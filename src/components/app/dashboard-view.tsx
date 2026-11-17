@@ -15,12 +15,12 @@ function Finding({ weeksBehind, planWeek, plannedLevel }: { weeksBehind: number;
   if (weeksBehind > 0)
     return (
       <>
-        Kalender sudah masuk minggu ke-{planWeek} (Level {plannedLevel}); kamu tertinggal {weeksBehind} minggu dari
-        rencana.
+        Menurut jadwal, sekarang sudah minggu ke-{planWeek} (Level {plannedLevel}). Kamu tertinggal {weeksBehind}{" "}
+        minggu, tidak apa-apa. Lanjutkan pelan-pelan, ya.
       </>
     );
-  if (weeksBehind < 0) return <>Kamu {-weeksBehind} minggu lebih cepat dari rencana kalender.</>;
-  return <>Sesuai rencana kalender.</>;
+  if (weeksBehind < 0) return <>Kamu {-weeksBehind} minggu lebih cepat dari jadwal. Keren!</>;
+  return <>Kamu tepat sesuai jadwal.</>;
 }
 
 export function DashboardView() {
@@ -38,13 +38,13 @@ export function DashboardView() {
   return (
     <div className="mx-auto max-w-[1100px] px-4 pt-8 pb-20 sm:px-6 md:pt-[72px]">
       <header data-reveal className="max-w-[820px]">
-        <h1 className="font-serif text-[28px] leading-[1.15] font-semibold text-ink md:text-[32px]">
-          Minggu ke-{d.actualWeek} dari {d.total}, Level{"\u00a0"}{current.level}.
+        <h1 className="text-[28px] leading-[1.15] font-bold text-ink md:text-[32px]">
+          Halo! Ini minggu ke-{d.actualWeek}, Level{"\u00a0"}{current.level}.
         </h1>
         <p className="mt-3 text-[17px] leading-relaxed text-ink">
           <Finding weeksBehind={d.weeksBehind} planWeek={d.planWeek} plannedLevel={d.planned.level} />{" "}
           <span className="text-muted-foreground">
-            {formatDate(state.today)}. Mulai belajar {formatDate(state.startedOn, true)}.
+            {formatDate(state.today)}. Kamu mulai belajar {formatDate(state.startedOn, true)}.
           </span>
         </p>
       </header>
@@ -68,7 +68,7 @@ export function DashboardView() {
           <Tile
             label="Streak"
             value={`${d.streak} hari`}
-            caption={d.todayEntry ? `Hari ini sudah latihan, ${d.todayEntry.bpm} BPM` : "Hari ini belum latihan"}
+            caption={d.todayEntry ? `Hari ini sudah latihan di ${d.todayEntry.bpm} BPM` : "Hari ini belum latihan. Yuk!"}
           />
         </div>
         <div className="lg:col-span-3">
@@ -88,26 +88,26 @@ export function DashboardView() {
             <div className="min-w-0">
               <p className="text-[20px] leading-snug font-semibold text-ink">{current.drill.title}</p>
               <p className="tabular mt-1 text-[15px] text-muted-foreground">
-                {d.bpmToday} BPM hari ini, naik bertahap ke {current.drill.bpm_goal} BPM di akhir level
+                Hari ini {d.bpmToday} BPM. Tiap kali latihan, temponya naik sedikit sampai {current.drill.bpm_goal} BPM.
               </p>
               <SheetMusic
                 notation={current.drill.notation}
                 clef={current.drill.clef}
-                className="mt-4 rounded-lg px-2 pt-2"
+                className="mt-4 rounded-[14px] border-2 border-ink px-2 pt-2"
                 minMeasureWidth={200}
               />
             </div>
             <div className="flex flex-col gap-5">
               <WeekStrip practice={state.practice} today={state.today} />
               <Link href="/latihan" className={cn(buttonVariants({ size: "lg" }), "mt-auto w-full")}>
-                {d.todayEntry ? "Latihan lagi" : "Mulai latihan"}
+                {d.todayEntry ? "Latihan lagi" : "Ayo latihan"}
               </Link>
             </div>
           </div>
         </Panel>
 
-        <Panel title="Target minggu ini" className="col-span-2 lg:col-span-3">
-          <p className="font-serif text-[17px] leading-[1.5] text-ink">{current.weekly_targets[d.week - 1]}</p>
+        <Panel title="Misi minggu ini" className="col-span-2 lg:col-span-3">
+          <p className="text-[17px] leading-[1.5] text-ink">{current.weekly_targets[d.week - 1]}</p>
           {d.lessonsThisWeek.length > 0 && (
             <ul className="mt-4 space-y-2">
               {d.lessonsThisWeek.map((l) => {
@@ -121,7 +121,7 @@ export function DashboardView() {
                       {done ? (
                         <Check className="mt-0.5 size-4 text-ink" aria-label="Selesai" />
                       ) : (
-                        <span className="key-shape mt-0.5 inline-block h-4 w-2.5 shrink-0 bg-oxblood" aria-hidden="true" />
+                        <span className="mt-0.5 inline-block size-4 shrink-0 rounded-[5px] border-2 border-ink bg-white" aria-hidden="true" />
                       )}
                       <span className={cn(done && "text-muted-foreground")}>{l.title}</span>
                     </Link>
@@ -133,7 +133,7 @@ export function DashboardView() {
         </Panel>
 
         <Panel
-          title="Timeline 45 minggu"
+          title="Perjalanan 45 minggu"
           chip={`${Math.round(((d.actualWeek - 1) / d.total) * 100)}% lewat`}
           link={{ href: "/peta", label: "Peta level" }}
           className="col-span-2 lg:col-span-12"
@@ -156,8 +156,8 @@ export function DashboardView() {
                   <Link
                     href={`/lessons/${l.id}`}
                     className={cn(
-                      "flex min-h-[63px] items-center gap-3 rounded-lg border px-4 transition-colors",
-                      isNext ? "border-oxblood/40 bg-white" : "border-[#e6e3e3] bg-[#f9f8f8] hover:bg-white",
+                      "flex min-h-[63px] items-center gap-3 rounded-[14px] border-2 px-4 transition-colors",
+                      isNext ? "border-ink bg-hi shadow-[3px_3px_0_var(--ink)]" : "border-ink bg-white hover:bg-hi",
                     )}
                   >
                     <span className="tabular w-16 shrink-0 text-[13px] text-muted-foreground">Minggu {l.week}</span>
@@ -165,7 +165,7 @@ export function DashboardView() {
                     {done ? (
                       <Check className="size-4 text-ink" aria-label="Selesai" />
                     ) : isNext ? (
-                      <span className="text-[13px] font-medium text-oxblood">Berikutnya</span>
+                      <span className="rounded-full border-2 border-ink bg-white px-2.5 py-0.5 text-[12px] font-bold text-ink">Selanjutnya</span>
                     ) : null}
                   </Link>
                 </li>
@@ -192,7 +192,7 @@ export function DashboardView() {
                   {nextModule.lessons.length} pelajaran
                 </p>
                 <p className="mt-3 text-[14px] text-muted-foreground">
-                  Terbuka setelah {current.lessons.length - doneInLevel} pelajaran tersisa di Level {current.level}{" "}
+                  Terbuka kalau {current.lessons.length - doneInLevel} pelajaran lagi di Level {current.level} sudah
                   selesai, termasuk kuisnya.
                 </p>
               </div>

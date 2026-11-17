@@ -21,12 +21,12 @@ export function WeekStrip({ practice, today }: { practice: PracticeEntry[]; toda
               <div
                 title={bpm ? `${d}: ${bpm} BPM` : d}
                 className={cn(
-                  "key-shape h-10 w-full",
-                  bpm ? "bg-ink" : d > today ? "bg-white" : "bg-[#dcd8d8]",
-                  isToday && !bpm && "outline-2 -outline-offset-2 outline-oxblood",
+                  "h-10 w-full rounded-[10px] border-2 border-ink",
+                  bpm ? "bg-ink" : d > today ? "bg-white" : "bg-hi",
+                  isToday && !bpm && "border-dashed bg-white",
                 )}
               />
-              <span className={cn("text-[12px]", isToday ? "font-semibold text-ink" : "text-muted-foreground")}>
+              <span className={cn("text-[12px]", isToday ? "font-bold text-ink" : "text-muted-foreground")}>
                 {DAYS[i]}
               </span>
             </li>
@@ -34,7 +34,7 @@ export function WeekStrip({ practice, today }: { practice: PracticeEntry[]; toda
         })}
       </ol>
       <p className="mt-2 text-[13px] text-muted-foreground">
-        <span className="tabular">{count}</span> dari 7 hari pekan ini
+        Pekan ini kamu latihan <span className="tabular">{count}</span> dari 7 hari
       </p>
     </div>
   );
