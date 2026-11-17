@@ -1,0 +1,237 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/*
+ * Arah desain: "One motif" (tasteskill, seed 684319902).
+ * Motif: bentuk tuts piano. Persegi panjang dengan sudut atas lurus dan
+ * sudut bawah membulat; dipakai untuk tombol, masker foto, bullet, dan pita.
+ * Palet: oxblood (felt merah di atas tuts) di atas kertas abu-abu.
+ */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-franklin);
+  --font-serif: var(--font-source-serif);
+  --font-heading: var(--font-franklin);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  /* Warna merek */
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-oxblood: var(--oxblood);
+  --color-oxblood-soft: var(--oxblood-soft);
+  --color-chrome: var(--chrome);
+  --color-panel: var(--panel);
+  --color-ink: var(--ink);
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 16px;
+}
+
+:root {
+  /* Halaman depan: kertas abu-abu, tinta oxblood */
+  --paper: #e2e2e2;
+  --paper-2: #d6d6d6;
+  --oxblood: #7d0c14;
+  --oxblood-soft: #7a4a4e;
+
+  /* Layar aplikasi: bingkai abu-abu, lembar putih, tinta hampir hitam */
+  --chrome: #e7e5e5;
+  --panel: #f3f2f2;
+  --ink: #1f1416;
+
+  --background: #ffffff;
+  --foreground: var(--ink);
+  --card: #ffffff;
+  --card-foreground: var(--ink);
+  --popover: #ffffff;
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: #ffffff;
+  --secondary: #e6e3e3;
+  --secondary-foreground: var(--ink);
+  --muted: var(--panel);
+  --muted-foreground: #66585a;
+  --accent: var(--panel);
+  --accent-foreground: var(--ink);
+  --destructive: #b42318;
+  --border: #e6e3e3;
+  --input: #d6d2d2;
+  --ring: var(--oxblood);
+
+  /* Bentuk motif: sudut atas tajam, sudut bawah membulat (tuts) */
+  --key-radius: 2px 2px 10px 10px;
+
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);
+  --step-display: clamp(2.75rem, 1rem + 4.6vw, 5rem);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "tnum" 0;
+  }
+  ::selection {
+    background: var(--oxblood);
+    color: var(--paper);
+  }
+  :focus-visible {
+    outline: 2px solid var(--oxblood);
+    outline-offset: 2px;
+  }
+}
+
+@utility key-shape {
+  border-radius: var(--key-radius);
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Motion: entrance per bagian ---------- */
+/* Konten tetap terlihat jika JavaScript gagal: hanya disembunyikan saat html.js */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 700ms var(--ease-out),
+    transform 700ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes drift {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+.drift {
+  animation: drift 24s var(--ease-out) infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .drift {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Slider: track solid, bagian yang sudah dilewati penuh, thumb persegi ---------- */
+.stage-range,
+.tempo-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 32px;
+  background: transparent;
+  cursor: pointer;
+}
+.stage-range::-webkit-slider-runnable-track,
+.tempo-range::-webkit-slider-runnable-track {
+  height: 8px;
+  background: linear-gradient(to right, currentColor var(--fill), color-mix(in srgb, currentColor 22%, transparent) var(--fill));
+}
+.stage-range::-moz-range-track,
+.tempo-range::-moz-range-track {
+  height: 8px;
+  background: color-mix(in srgb, currentColor 22%, transparent);
+}
+.stage-range::-moz-range-progress,
+.tempo-range::-moz-range-progress {
+  height: 8px;
+  background: currentColor;
+}
+.stage-range::-webkit-slider-thumb,
+.tempo-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 32px;
+  height: 32px;
+  margin-top: -12px;
+  background: var(--oxblood);
+  border-radius: var(--key-radius);
+  transition: transform 150ms var(--ease-out);
+}
+.stage-range::-moz-range-thumb,
+.tempo-range::-moz-range-thumb {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: var(--oxblood);
+  border-radius: var(--key-radius);
+}
+.stage-range:active::-webkit-slider-thumb,
+.tempo-range:active::-webkit-slider-thumb {
+  transform: scale(1.1);
+}
+.stage-range {
+  color: var(--oxblood);
+}
+.tempo-range {
+  height: 0.6em;
+}
+.tempo-range::-webkit-slider-runnable-track {
+  height: 0.2em;
+}
+.tempo-range::-webkit-slider-thumb {
+  width: 0.6em;
+  height: 0.6em;
+  margin-top: -0.2em;
+}
+.tempo-range::-moz-range-thumb {
+  width: 0.6em;
+  height: 0.6em;
+}
+@media (max-width: 767px) {
+  .stage-range::-webkit-slider-thumb {
+    width: 40px;
+    height: 40px;
+    margin-top: -16px;
+  }
+}

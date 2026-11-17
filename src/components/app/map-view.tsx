@@ -1,0 +1,130 @@
+"use client";
+
+import Link from "next/link";
+import { Check, Lock } from "lucide-react";
+import { useLearner } from "./use-learner";
+import { TIERS } from "@/lib/curriculum/types";
+import { cn } from "@/lib/utils";
+
+export function MapView() {
+  const { state, derived: d } = useLearner();
+
+  if (!state || !d) {
+    return <div className="mx-auto max-w-[1100px] px-6 py-16 text-muted-foreground">Memuat peta level…</div>;
+  }
+
+  const tiers = Object.entries(TIERS).map(([tier, name]) => ({
+    name,
+    modules: state.curriculum.filter((m) => m.tier === Number(tier)),
+  }));
+
+  return (
+    <div className="mx-auto max-w-[1100px] px-4 pt-10 pb-20 sm:px-6 md:pt-[72px]">
+      <header data-reveal className="max-w-[820px]">
+        <h1 className="text-[24px] leading-tight font-semibold text-ink md:text-[30px]">Peta level</h1>
+        <p className="mt-2 text-[17px] leading-relaxed text-ink">
+          12 level dalam {d.total} minggu. Level berikutnya terbuka setelah semua pelajaran dan kuis di level
+          sebelumnya selesai.
+        </p>
+      </header>
+
+      <div className="mt-10 space-y-12">
+        {tiers.map(({ name, modules }) => (
+          <section key={name} aria-labelledby={`tier-${name}`}>
+            <div className="mb-3 flex items-baseline justify-between">
+              <h2 id={`tier-${name}`} className="text-[18px] font-semibold text-ink">
+                {name}
+              </h2>
+              <span className="tabular text-[13px] text-muted-foreground">
+                {modules.reduce((n, m) => n + m.duration_weeks, 0)} minggu
+              </span>
+            </div>
+            <ol className="space-y-3">
+              {modules.map((m) => {
+                const start = d.starts.get(m.id) ?? 1;
+                const end = start + m.duration_weeks - 1;
+                const open = d.unlocked.has(m.id);
+                const isCurrent = m.id === d.current.id;
+                const done = m.lessons.filter((l) => state.completed.has(l.id)).length;
+                return (
+                  <li
+                    key={m.id}
+                    id={`level-${m.level}`}
+                    data-reveal
+                    className={cn(
+                      "scroll-mt-24 rounded-xl p-5",
+                      isCurrent ? "border border-oxblood/30 bg-white" : "bg-panel",
+                    )}
+                  >
+                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <h3 className="text-[17px] font-semibold text-ink">
+                        {m.level}. {m.title}
+                      </h3>
+                      {!open && <Lock className="size-3.5 text-muted-foreground" aria-label="Terkunci" />}
+                      {isCurrent && <span className="text-[13px] font-medium text-oxblood">Sedang berjalan</span>}
+                      <span className="tabular ml-auto text-[13px] text-muted-foreground">
+                        Minggu {start}
+                        {end > start && ` sampai ${end}`} · {m.daily_minutes} menit sehari · {done}/{m.lessons.length}{" "}
+                        pelajaran
+                      </span>
+                    </div>
+                    <p className="mt-1 text-[15px] text-muted-foreground">{m.description}</p>
+
+                    <div className="mt-4 grid gap-6 md:grid-cols-2">
+                      <div>
+                        <h4 className="mb-2 text-[13px] text-muted-foreground">Target mingguan</h4>
+                        <ol className="space-y-2">
+                          {m.weekly_targets.map((t, i) => (
+                            <li key={i} className="flex gap-3 text-[15px] leading-snug text-ink">
+                              <span className="tabular w-14 shrink-0 text-muted-foreground">Minggu {start + i}</span>
+                              <span>{t}</span>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                      <div>
+                        <h4 className="mb-2 text-[13px] text-muted-foreground">Pelajaran</h4>
+                        <ul className="space-y-1">
+                          {m.lessons.map((l) => {
+                            const lessonDone = state.completed.has(l.id);
+                            const row = (
+                              <>
+                                {lessonDone ? (
+                                  <Check className="size-4 shrink-0 text-ink" aria-label="Selesai" />
+                                ) : (
+                                  <span className="key-shape inline-block h-4 w-2.5 shrink-0 bg-[#d6d2d2]" aria-hidden="true" />
+                                )}
+                                <span className="flex-1">{l.title}</span>
+                                {l.content_type === "quiz" && <span className="text-[13px] text-muted-foreground">Kuis</span>}
+                              </>
+                            );
+                            return (
+                              <li key={l.id}>
+                                {open ? (
+                                  <Link
+                                    href={`/lessons/${l.id}`}
+                                    className="flex items-center gap-2.5 rounded-md px-2 py-1.5 text-[15px] text-ink hover:bg-[#e6e3e3]"
+                                  >
+                                    {row}
+                                  </Link>
+                                ) : (
+                                  <div className="flex items-center gap-2.5 px-2 py-1.5 text-[15px] text-muted-foreground">
+                                    {row}
+                                  </div>
+                                )}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </section>
+        ))}
+      </div>
+    </div>
+  );
+}
