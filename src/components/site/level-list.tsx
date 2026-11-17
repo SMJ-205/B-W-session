@@ -26,7 +26,7 @@ export function LevelList() {
   });
 
   return (
-    <section id="kurikulum" className="scroll-mt-6 px-4 pt-[clamp(96px,14vw,200px)] md:px-12">
+    <section id="kurikulum" className="scroll-mt-6 px-4 pt-[clamp(80px,14vw,200px)] md:px-12">
       <div className="grid items-end gap-10 md:grid-cols-2">
         <div>
           <h2
@@ -64,7 +64,7 @@ export function LevelList() {
 
       {tiers.map(({ name, modules, weeks }) => (
         <div key={name}>
-          <div className="mt-24 mb-10 flex items-baseline justify-between gap-4" data-reveal>
+          <div className="mt-24 mb-8 flex md:mb-10 items-baseline justify-between gap-4" data-reveal>
             <h3 className="text-[length:var(--step-head)] leading-none font-bold tracking-[-0.03em] text-oxblood">
               {name}
             </h3>

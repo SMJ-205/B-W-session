@@ -19,7 +19,7 @@ export function MapView() {
   }));
 
   return (
-    <div className="mx-auto max-w-[1100px] px-4 pt-10 pb-20 sm:px-6 md:pt-[72px]">
+    <div className="mx-auto max-w-[1100px] px-4 pt-8 pb-20 sm:px-6 md:pt-[72px]">
       <header data-reveal className="max-w-[820px]">
         <h1 className="text-[24px] leading-tight font-semibold text-ink md:text-[30px]">Peta level</h1>
         <p className="mt-2 text-[17px] leading-relaxed text-ink">
@@ -52,7 +52,7 @@ export function MapView() {
                     id={`level-${m.level}`}
                     data-reveal
                     className={cn(
-                      "scroll-mt-24 rounded-xl p-5",
+                      "scroll-mt-16 rounded-xl p-4 sm:p-5",
                       isCurrent ? "border border-oxblood/30 bg-white" : "bg-panel",
                     )}
                   >
@@ -62,7 +62,7 @@ export function MapView() {
                       </h3>
                       {!open && <Lock className="size-3.5 text-muted-foreground" aria-label="Terkunci" />}
                       {isCurrent && <span className="text-[13px] font-medium text-oxblood">Sedang berjalan</span>}
-                      <span className="tabular ml-auto text-[13px] text-muted-foreground">
+                      <span className="tabular basis-full text-[13px] text-muted-foreground sm:ml-auto sm:basis-auto">
                         Minggu {start}
                         {end > start && ` sampai ${end}`} · {m.daily_minutes} menit sehari · {done}/{m.lessons.length}{" "}
                         pelajaran
@@ -76,7 +76,7 @@ export function MapView() {
                         <ol className="space-y-2">
                           {m.weekly_targets.map((t, i) => (
                             <li key={i} className="flex gap-3 text-[15px] leading-snug text-ink">
-                              <span className="tabular w-14 shrink-0 text-muted-foreground">Minggu {start + i}</span>
+                              <span className="tabular w-[4.5rem] shrink-0 whitespace-nowrap text-muted-foreground">Minggu {start + i}</span>
                               <span>{t}</span>
                             </li>
                           ))}
@@ -103,7 +103,7 @@ export function MapView() {
                                 {open ? (
                                   <Link
                                     href={`/lessons/${l.id}`}
-                                    className="flex items-center gap-2.5 rounded-md px-2 py-1.5 text-[15px] text-ink hover:bg-[#e6e3e3]"
+                                    className="flex min-h-11 items-center gap-2.5 rounded-md px-2 py-1.5 text-[15px] text-ink hover:bg-[#e6e3e3] active:bg-[#e6e3e3]"
                                   >
                                     {row}
                                   </Link>

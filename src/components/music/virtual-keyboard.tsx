@@ -37,6 +37,7 @@ export function VirtualKeyboard({
 }: VirtualKeyboardProps) {
   const [pressed, setPressed] = useState<Set<number>>(new Set());
   const onPlayRef = useRef(onPlay);
+  const scrollerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     onPlayRef.current = onPlay;
@@ -53,6 +54,19 @@ export function VirtualKeyboard({
 
   const highlightedMidi = useMemo(() => new Set(highlighted.map(toMidi)), [highlighted]);
   const whiteCount = keys.filter((k) => !k.black).length;
+
+  // Di layar sempit keyboard bisa digeser; tuts yang menyala selalu dibawa ke tengah.
+  const firstLit = highlighted[0];
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller || !firstLit || scroller.scrollWidth <= scroller.clientWidth) return;
+    const el = scroller.querySelector<HTMLElement>(`[data-pitch="${midiToPitch(toMidi(firstLit))}"]`);
+    if (!el) return;
+    const target = el.offsetLeft + el.offsetWidth / 2 - scroller.clientWidth / 2;
+    if (el.offsetLeft < scroller.scrollLeft || el.offsetLeft + el.offsetWidth > scroller.scrollLeft + scroller.clientWidth) {
+      scroller.scrollTo({ left: target, behavior: "smooth" });
+    }
+  }, [firstLit]);
 
   const triggerRef = useRef((midi: number) => {
     const pitch = midiToPitch(midi);
@@ -85,8 +99,13 @@ export function VirtualKeyboard({
 
   let whiteIndex = 0;
   return (
-    <div className={cn("w-full overflow-x-auto", className)} role="group" aria-label="Keyboard piano virtual">
-      <div className="relative h-40 min-w-[560px] select-none sm:h-48">
+    <div
+      ref={scrollerRef}
+      className={cn("w-full touch-pan-x overflow-x-auto overscroll-x-contain", className)}
+      role="group"
+      aria-label="Keyboard piano virtual"
+    >
+      <div className="relative h-44 select-none sm:h-48" style={{ minWidth: `${whiteCount * 40}px` }}>
         {keys.map((k) => {
           const lit = highlightedMidi.has(k.midi) || pressed.has(k.midi);
           if (!k.black) {
@@ -96,11 +115,12 @@ export function VirtualKeyboard({
                 key={k.midi}
                 type="button"
                 aria-label={k.pitch}
+                data-pitch={k.pitch}
                 onPointerDown={() => triggerRef.current(k.midi)}
                 onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && triggerRef.current(k.midi)}
                 style={{ left: `${left}%`, width: `calc(${100 / whiteCount}% - 3px)` }}
                 className={cn(
-                  "key-shape absolute top-0 flex h-full items-end justify-center pb-2 text-[13px] transition-colors duration-100",
+                  "key-shape absolute top-0 flex h-full touch-manipulation items-end justify-center pb-2 text-[13px] transition-colors duration-100",
                   lit ? "bg-oxblood text-paper" : "bg-panel text-muted-foreground hover:bg-[#e9e7e7]",
                 )}
               >
@@ -114,11 +134,12 @@ export function VirtualKeyboard({
               key={k.midi}
               type="button"
               aria-label={k.pitch}
+              data-pitch={k.pitch}
               onPointerDown={() => triggerRef.current(k.midi)}
               onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && triggerRef.current(k.midi)}
               style={{ left: `${left}%`, width: `${(100 / whiteCount) * 0.6}%` }}
               className={cn(
-                "key-shape absolute top-0 z-10 h-[60%] transition-colors duration-100",
+                "key-shape absolute top-0 z-10 h-[60%] touch-manipulation transition-colors duration-100",
                 lit ? "bg-oxblood" : "bg-ink hover:bg-[#3a2a2d]",
               )}
             />

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const WORD = "PIANOBELAJAR".split("");
+const WORD = "NOTESOFNOPIA".split("");
 /** Tinggi tiap blok huruf (persen dari pita), seperti tuts dengan panjang berbeda. */
 const HEIGHTS = [100, 72, 88, 64, 94, 78, 100, 68, 90, 74, 96, 82];
 
@@ -26,14 +26,33 @@ export function SiteFooter() {
   return (
     <footer className="bg-oxblood px-4 pt-16 pb-10 text-paper md:px-12">
       {/* Wordmark dibangun dari blok seperti deret tuts */}
-      <div className="flex h-[22svh] items-end gap-1 md:h-[34svh]" role="img" aria-label="Piano Belajar">
+      {/* Ponsel: dua baris (NOTES OF / NOPIA) agar hurufnya tetap besar */}
+      <div className="space-y-1 md:hidden" role="img" aria-label="Notes of Nopia">
+        {[WORD.slice(0, 7), WORD.slice(7)].map((row, r) => (
+          <div key={r} className="flex h-[14svh] items-end gap-1">
+            {row.map((ch, i) => (
+              <div
+                key={i}
+                style={{ height: `${HEIGHTS[r * 7 + i]}%` }}
+                className={cn(
+                  "key-shape flex flex-1 items-end justify-center bg-paper pb-2 text-[clamp(1.5rem,8vw,2.5rem)] leading-none font-bold text-oxblood",
+                  r === 0 && i === 5 && "ml-2",
+                )}
+              >
+                {ch}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className="hidden h-[34svh] items-end gap-1 md:flex" role="img" aria-label="Notes of Nopia">
         {WORD.map((ch, i) => (
           <div
             key={i}
             style={{ height: `${HEIGHTS[i]}%` }}
             className={cn(
               "key-shape flex flex-1 items-end justify-center bg-paper pb-[1.5vw] text-[clamp(1.25rem,5.2vw,5.5rem)] leading-none font-bold text-oxblood",
-              i === 5 && "ml-[1.5vw]",
+              (i === 5 || i === 7) && "ml-[1.5vw]",
             )}
           >
             {ch}
@@ -41,7 +60,7 @@ export function SiteFooter() {
         ))}
       </div>
 
-      <div className="mt-14 grid gap-10 md:grid-cols-12">
+      <div className="mt-12 grid gap-10 md:mt-14 md:grid-cols-12">
         <nav aria-label="Tautan footer" className="grid grid-cols-2 gap-8 md:col-span-7 md:grid-cols-4">
           {LINKS.map((col) => (
             <div key={col.title}>
@@ -79,7 +98,7 @@ export function SiteFooter() {
       </div>
 
       <div className="mt-12 flex items-center justify-between gap-4 text-[13px]">
-        <p>© 2026 Piano Belajar</p>
+        <p>© 2026 Notes of Nopia</p>
         <Link href="/dashboard" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "bg-paper text-oxblood")}>
           Mulai latihan
         </Link>

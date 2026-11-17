@@ -36,7 +36,7 @@ export function DashboardView() {
   const doneInLevel = current.lessons.filter((l) => state.completed.has(l.id)).length;
 
   return (
-    <div className="mx-auto max-w-[1100px] px-4 pt-10 pb-20 sm:px-6 md:pt-[72px]">
+    <div className="mx-auto max-w-[1100px] px-4 pt-8 pb-20 sm:px-6 md:pt-[72px]">
       <header data-reveal className="max-w-[820px]">
         <h1 className="font-serif text-[28px] leading-[1.15] font-semibold text-ink md:text-[32px]">
           Minggu ke-{d.actualWeek} dari {d.total}, Level{"\u00a0"}{current.level}.
@@ -49,7 +49,7 @@ export function DashboardView() {
         </p>
       </header>
 
-      <div className="mt-[50px] grid grid-cols-2 gap-4 lg:grid-cols-12">
+      <div className="mt-8 grid grid-cols-2 gap-3 md:mt-[50px] md:gap-4 lg:grid-cols-12">
         <div className="lg:col-span-3">
           <Tile
             label="Level"

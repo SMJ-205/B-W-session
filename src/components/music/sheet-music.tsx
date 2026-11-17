@@ -95,9 +95,11 @@ export function SheetMusic({
       const perMeasure = beatsPerMeasure(timeSignature);
       const [num, den] = timeSignature.split("/").map(Number);
       const measures = toMeasures(notes, perMeasure);
-      const perRow = Math.max(1, Math.floor(width / minMeasureWidth));
+      // Di layar sempit dua birama tetap muat per baris.
+      const minWidth = width < 480 ? Math.min(minMeasureWidth, 160) : minMeasureWidth;
+      const perRow = Math.max(1, Math.floor(width / minWidth));
       const rows = Math.ceil(measures.length / perRow);
-      const rowHeight = 130;
+      const rowHeight = width < 480 ? 116 : 130;
 
       const renderer = new VF.Renderer(el as HTMLDivElement, VF.Renderer.Backends.SVG);
       renderer.resize(width, rows * rowHeight + 10);

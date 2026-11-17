@@ -1,4 +1,4 @@
-# Piano Belajar
+# Notes of Nopia
 
 Aplikasi web belajar piano mandiri. Kurikulumnya 12 level dalam 45 minggu, dengan target mingguan dan latihan harian 15 sampai 30 menit. Partitur dirender VexFlow, suaranya sampel piano asli lewat Tone.js, dan keyboard virtualnya bisa dimainkan dengan mouse, sentuhan, atau keyboard laptop.
 
@@ -81,7 +81,7 @@ public/media/                  Foto dan video dari koleksi terbuka; lisensinya d
 
 ## Desain
 
-Arah visual diambil dengan skill tasteskill: halaman depan memakai arah "One motif" (seed 684319902), dan layar app memakai gaya "Editorial greeting" dengan palet dan huruf yang sama. Motifnya bentuk tuts piano: sudut atas tajam, sudut bawah membulat. Bentuk ini dipakai untuk tombol, masker foto, bullet, pita hero, timeline, dan wordmark di footer. Paletnya oxblood di atas abu-abu, mengikuti kain felt merah di atas tuts. Hurufnya Libre Franklin dan Source Serif 4.
+Arah visual diambil dengan skill tasteskill: halaman depan memakai arah "One motif" (seed 684319902), dan layar app memakai gaya "Editorial greeting" dengan palet dan huruf yang sama. Motifnya bentuk tuts piano: sudut atas tajam, sudut bawah membulat. Bentuk ini dipakai untuk tombol, masker foto, bullet, pita hero, timeline, dan wordmark di footer. Paletnya oxblood di atas abu-abu, mengikuti kain felt merah di atas tuts. Hurufnya Sarabun untuk semua teks.
 
 Semua gambar dan video berasal dari Wikimedia Commons dan diberi kredit di footer. Klip square piano dipotong ke detik 20 sampai 60 dan dibisukan.
 

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NotationPlayer } from "@/components/music/notation-player";
+import { MobileActionBar } from "./app-shell";
 import { WeekStrip } from "./week-strip";
 import { useLearner } from "./use-learner";
 import { logPractice } from "@/lib/curriculum/repository";
@@ -36,7 +37,7 @@ export function PracticeView() {
   };
 
   return (
-    <div className="mx-auto max-w-[1100px] px-4 pt-10 pb-20 sm:px-6 md:pt-[72px]">
+    <div className="mx-auto max-w-[1100px] px-4 pt-8 pb-28 sm:px-6 md:pt-[72px] md:pb-20">
       <header data-reveal className="max-w-[820px]">
         <p className="text-[15px] text-muted-foreground">
           <Link href="/dashboard" className="hover:text-ink hover:underline">
@@ -57,8 +58,8 @@ export function PracticeView() {
         </p>
       </header>
 
-      <div className="mt-10 grid gap-4 lg:grid-cols-12">
-        <section data-reveal className="min-w-0 rounded-xl border border-border bg-white p-5 lg:col-span-9">
+      <div className="mt-6 grid gap-4 md:mt-10 lg:grid-cols-12">
+        <section data-reveal className="-mx-4 min-w-0 border-y border-border bg-white px-4 py-5 sm:mx-0 sm:rounded-xl sm:border sm:p-5 lg:col-span-9">
           <h2 className="sr-only">Partitur latihan</h2>
           <NotationPlayer
             key={`${current.id}-${d.bpmToday}`}
@@ -70,7 +71,7 @@ export function PracticeView() {
         </section>
 
         <aside className="flex flex-col gap-4 lg:col-span-3">
-          <section data-reveal className="rounded-xl bg-panel p-5">
+          <section data-reveal className="hidden rounded-xl bg-panel p-5 md:block">
             <h2 className="mb-4 text-[14px] font-semibold text-ink">Catat latihan</h2>
             <p className="tabular text-[28px] leading-tight text-ink">{playedBpm} BPM</p>
             <p className="mt-1 text-[13px] text-muted-foreground">
@@ -94,6 +95,20 @@ export function PracticeView() {
           </section>
         </aside>
       </div>
+
+      {/* Ponsel: aksi utama selalu dalam jangkauan ibu jari */}
+      <MobileActionBar>
+        <div className="min-w-0 flex-1">
+          <p className="tabular text-[20px] leading-tight text-ink">{playedBpm} BPM</p>
+          <p className="truncate text-[13px] text-muted-foreground">
+            {error ?? (bpm ? "Tempo putaran terakhir" : "Tempo hari ini")}
+          </p>
+        </div>
+        <Button onClick={save} disabled={saving} size="lg" className="shrink-0">
+          {d.todayEntry ? <Check /> : null}
+          {saving ? "Menyimpan…" : d.todayEntry ? "Perbarui" : "Selesai latihan"}
+        </Button>
+      </MobileActionBar>
     </div>
   );
 }

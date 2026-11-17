@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { NotationPlayer } from "@/components/music/notation-player";
 import { VirtualKeyboard } from "@/components/music/virtual-keyboard";
 import { useLearner } from "@/components/app/use-learner";
+import { MobileActionBar } from "@/components/app/app-shell";
 import { Quiz } from "./quiz";
 import { markLessonComplete } from "@/lib/curriculum/repository";
 import { TIERS } from "@/lib/curriculum/types";
@@ -19,7 +20,7 @@ export function LessonView({ params }: { params: Promise<{ id: string }> }) {
   const [saving, setSaving] = useState(false);
 
   const shell = (children: React.ReactNode) => (
-    <div className="mx-auto max-w-[1100px] px-4 pt-10 pb-20 sm:px-6 md:pt-[72px]">{children}</div>
+    <div className="mx-auto max-w-[1100px] px-4 pt-8 pb-28 sm:px-6 md:pt-[72px] md:pb-20">{children}</div>
   );
 
   if (!state || !d) return shell(<p className="text-muted-foreground">Memuat pelajaran…</p>);
@@ -75,9 +76,9 @@ export function LessonView({ params }: { params: Promise<{ id: string }> }) {
         )}
       </header>
 
-      <div data-reveal className="mt-8">
+      <div data-reveal className="mt-6 md:mt-8">
         {lesson.content_type === "interactive_sheet" && lesson.notation_data && (
-          <section className="rounded-xl border border-border bg-white p-5">
+          <section className="-mx-4 border-y border-border bg-white px-4 py-5 sm:mx-0 sm:rounded-xl sm:border sm:p-5">
             <h2 className="sr-only">Partitur</h2>
             <NotationPlayer
               notation={lesson.notation_data}
@@ -88,14 +89,14 @@ export function LessonView({ params }: { params: Promise<{ id: string }> }) {
         )}
 
         {lesson.content_type === "text" && (
-          <section className="rounded-xl border border-border bg-white p-5">
+          <section className="-mx-4 border-y border-border bg-white px-4 py-5 sm:mx-0 sm:rounded-xl sm:border sm:p-5">
             <h2 className="mb-4 text-[14px] font-semibold text-ink">Coba di keyboard</h2>
             <VirtualKeyboard />
           </section>
         )}
 
         {lesson.content_type === "quiz" && lesson.quiz && (
-          <section className="max-w-[820px] rounded-xl bg-panel p-5 md:p-6">
+          <section className="-mx-4 max-w-[820px] bg-panel px-4 py-5 sm:mx-0 sm:rounded-xl sm:p-5 md:p-6">
             <h2 className="mb-5 text-[14px] font-semibold text-ink">
               {lesson.quiz.length} pertanyaan; semua harus benar untuk lulus
             </h2>
@@ -104,9 +105,9 @@ export function LessonView({ params }: { params: Promise<{ id: string }> }) {
         )}
       </div>
 
-      <footer className="mt-8 flex flex-wrap items-center gap-3">
-        {lesson.content_type !== "quiz" && (
-          <Button onClick={complete} disabled={done || saving} size="lg">
+      {(() => {
+        const markButton = lesson.content_type !== "quiz" && (
+          <Button onClick={complete} disabled={done || saving} size="lg" className="max-md:flex-1">
             {done ? (
               <>
                 <Check /> Selesai
@@ -117,24 +118,37 @@ export function LessonView({ params }: { params: Promise<{ id: string }> }) {
               "Tandai selesai"
             )}
           </Button>
-        )}
-        {next ? (
+        );
+        const nextButton = next ? (
           <Button
-            variant="secondary"
+            variant={done ? "default" : "secondary"}
             size="lg"
             disabled={!done}
             onClick={() => router.push(`/lessons/${next.id}`)}
+            className="min-w-0 max-md:flex-1"
           >
-            Lanjut: {next.title}
+            <span className="truncate">Lanjut: {next.title}</span>
           </Button>
         ) : (
           done && (
-            <Button variant="secondary" size="lg" onClick={() => router.push("/dashboard")}>
+            <Button variant="secondary" size="lg" onClick={() => router.push("/dashboard")} className="max-md:flex-1">
               Kembali ke beranda
             </Button>
           )
-        )}
-      </footer>
+        );
+        return (
+          <>
+            <footer className="mt-8 hidden flex-wrap items-center gap-3 md:flex">
+              {markButton}
+              {nextButton}
+            </footer>
+            {/* Ponsel: satu aksi utama yang menempel di bawah. Sebelum selesai: tandai; sesudahnya: lanjut. */}
+            {(markButton || done) && (
+              <MobileActionBar>{!done && markButton ? markButton : nextButton}</MobileActionBar>
+            )}
+          </>
+        );
+      })()}
     </article>,
   );
 }

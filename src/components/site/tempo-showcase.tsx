@@ -34,7 +34,7 @@ export function TempoShowcase() {
   return (
     <section
       className={cn(
-        "relative mt-[clamp(120px,14vw,220px)] overflow-hidden px-4 pt-12 transition-colors duration-500 md:px-12 md:pt-16",
+        "relative mt-[clamp(88px,14vw,220px)] overflow-hidden px-4 pt-12 transition-colors duration-500 md:px-12 md:pt-16",
         fast ? "bg-oxblood text-paper" : "bg-paper-2 text-oxblood",
       )}
     >
@@ -49,11 +49,11 @@ export function TempoShowcase() {
       {/* Kontrol asli dalam satuan em, dibesarkan lewat font-size */}
       <div
         data-ui
-        className="mt-12 mb-[-0.5em] ml-[-0.6em] w-fit text-[clamp(30px,9vw,40px)] md:mt-[-0.4em] md:mr-[-2.4em] md:ml-auto md:text-[clamp(44px,5vw,80px)]"
+        className="mt-10 mb-[-0.4em] text-[clamp(26px,7.4vw,34px)] md:mt-[-0.4em] md:mr-[-2.4em] md:ml-auto md:w-fit md:text-[clamp(44px,5vw,80px)]"
       >
         <div
           className={cn(
-            "flex w-[13em] flex-col gap-[0.5em] rounded-[0.35em] p-[0.6em] md:w-[14em]",
+            "flex w-full flex-col gap-[0.5em] rounded-[0.35em] p-[0.6em] md:w-[14em]",
             fast ? "bg-paper text-oxblood" : "bg-white text-ink",
           )}
         >
@@ -79,7 +79,7 @@ export function TempoShowcase() {
             type="button"
             onClick={toggle}
             className={cn(
-              "key-shape flex h-[1.4em] items-center justify-center gap-[0.25em] text-[0.5em] font-semibold transition-colors",
+              "key-shape flex h-[1.4em] touch-manipulation items-center justify-center gap-[0.25em] text-[0.5em] font-semibold transition-colors max-md:h-11 max-md:text-[16px]",
               fast ? "bg-oxblood text-paper hover:bg-[#5e0910]" : "bg-ink text-white hover:bg-[#3a2a2d]",
             )}
           >

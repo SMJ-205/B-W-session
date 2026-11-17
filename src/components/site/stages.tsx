@@ -90,7 +90,7 @@ export function Stages() {
   const [stage, setStage] = useState(0);
 
   return (
-    <section id="cara" className="mt-[clamp(120px,14vw,220px)] scroll-mt-0">
+    <section id="cara" className="mt-[clamp(88px,14vw,220px)] scroll-mt-0">
       <div className="grid md:min-h-[88svh] md:grid-cols-2">
         <div className="order-2 flex flex-col bg-oxblood px-4 pt-10 pb-8 text-paper md:order-1 md:px-12 md:pt-14">
           <h2

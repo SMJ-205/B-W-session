@@ -96,7 +96,7 @@ export function Hero() {
           </h1>
           <p className="mt-6 max-w-[38ch] font-serif text-[length:var(--step-body)] leading-[1.55] text-oxblood md:mt-8">
             <span className="inline-flex items-baseline gap-1.5 font-sans font-bold">
-              <BrandMark className="size-4 self-center" /> Piano Belajar
+              <BrandMark className="size-6 self-center" /> Notes of Nopia
             </span>{" "}
             menyusun 12 level selama 45 minggu, 15 sampai 30 menit sehari. Partitur, suara piano, dan keyboard
             semuanya ada di browser.
