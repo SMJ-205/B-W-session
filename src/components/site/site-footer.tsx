@@ -24,7 +24,7 @@ const LINKS = [
 
 export function SiteFooter() {
   return (
-    <footer className="mt-[clamp(88px,14vw,200px)] border-t-[2.5px] border-ink bg-ink px-4 pt-16 pb-10 text-white md:px-12">
+    <footer className="mt-[clamp(88px,14vw,200px)] border-t-[2.5px] border-ink bg-ink px-4 pt-16 pb-10 text-surface md:px-12">
       {/* Wordmark dibangun dari blok seperti deret tuts */}
       {/* Ponsel: dua baris (NOTES OF / NOPIA) agar hurufnya tetap besar */}
       <div className="space-y-1 md:hidden" role="img" aria-label="Notes of Nopia">
@@ -35,7 +35,7 @@ export function SiteFooter() {
                 key={i}
                 style={{ height: `${HEIGHTS[r * 7 + i]}%` }}
                 className={cn(
-                  "key-shape flex flex-1 items-end justify-center bg-white pb-2 text-[clamp(1.5rem,8vw,2.5rem)] leading-none font-bold text-oxblood",
+                  "key-shape flex flex-1 items-end justify-center bg-surface pb-2 text-[clamp(1.5rem,8vw,2.5rem)] leading-none font-bold text-oxblood",
                   r === 0 && i === 5 && "ml-2",
                 )}
               >
@@ -51,7 +51,7 @@ export function SiteFooter() {
             key={i}
             style={{ height: `${HEIGHTS[i]}%` }}
             className={cn(
-              "key-shape flex flex-1 items-end justify-center bg-white pb-[1.5vw] text-[clamp(1.25rem,5.2vw,5.5rem)] leading-none font-bold text-oxblood",
+              "key-shape flex flex-1 items-end justify-center bg-surface pb-[1.5vw] text-[clamp(1.25rem,5.2vw,5.5rem)] leading-none font-bold text-oxblood",
               (i === 5 || i === 7) && "ml-[1.5vw]",
             )}
           >
@@ -99,7 +99,7 @@ export function SiteFooter() {
 
       <div className="mt-12 flex items-center justify-between gap-4 text-[13px]">
         <p>© 2026 Notes of Nopia</p>
-        <Link href="/dashboard" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "shadow-[3px_3px_0_#ffffff]")}>
+        <Link href="/dashboard" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "shadow-[3px_3px_0_var(--surface)]")}>
           Mulai latihan
         </Link>
       </div>

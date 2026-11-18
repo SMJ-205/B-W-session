@@ -44,8 +44,8 @@ export function Quiz({
                   }}
                   className={cn(
                     "press flex min-h-14 touch-manipulation items-center justify-between gap-2 rounded-[14px] border-[2.5px] border-ink px-4 py-3 text-left text-[16px] font-bold shadow-[3px_3px_0_var(--ink)]",
-                    !chosen && "bg-white text-ink hover:bg-hi",
-                    chosen && !wrong && "bg-ink text-white",
+                    !chosen && "bg-surface text-ink hover:bg-hi",
+                    chosen && !wrong && "bg-oxblood text-surface",
                     wrong && "border-dashed bg-hi text-ink",
                   )}
                 >

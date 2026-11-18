@@ -122,7 +122,7 @@ export function VirtualKeyboard({
                 className={cn(
                   "key-shape absolute top-0 flex h-full touch-manipulation items-end justify-center pb-2 text-[13px] font-bold transition-colors duration-100",
                   "border-2 border-ink",
-                  lit ? "bg-lit text-white" : "bg-white text-muted-foreground hover:bg-hi",
+                  lit ? "bg-lit text-ink" : "bg-surface text-muted-foreground hover:bg-hi",
                 )}
               >
                 {showLabels && k.pitch}
@@ -141,7 +141,7 @@ export function VirtualKeyboard({
               style={{ left: `${left}%`, width: `${(100 / whiteCount) * 0.6}%` }}
               className={cn(
                 "key-shape absolute top-0 z-10 h-[60%] touch-manipulation transition-colors duration-100",
-                lit ? "bg-lit" : "bg-ink hover:bg-[#3a3a3a]",
+                lit ? "bg-lit" : "bg-ink hover:bg-oxblood-soft",
               )}
             />
           );

@@ -59,7 +59,7 @@ export function PracticeView() {
       </header>
 
       <div className="mt-6 grid gap-4 md:mt-10 lg:grid-cols-12">
-        <section data-reveal className="-mx-4 border-y-[2.5px] border-ink bg-white px-4 py-5 sm:mx-0 sm:sticker sm:p-5 min-w-0 lg:col-span-9">
+        <section data-reveal className="-mx-4 border-y-[2.5px] border-ink bg-surface px-4 py-5 sm:mx-0 sm:sticker sm:p-5 min-w-0 lg:col-span-9">
           <h2 className="sr-only">Partitur latihan</h2>
           <NotationPlayer
             key={`${current.id}-${d.bpmToday}`}

@@ -35,7 +35,7 @@ export function TempoShowcase() {
     <section
       className={cn(
         "relative mx-3 mt-[clamp(88px,14vw,220px)] overflow-hidden rounded-[24px] border-[2.5px] border-ink px-5 pt-10 shadow-[4px_4px_0_var(--ink)] transition-colors duration-500 sm:mx-4 md:mx-12 md:px-12 md:pt-14",
-        fast ? "bg-ink text-white" : "dotted text-ink",
+        fast ? "bg-oxblood text-surface" : "dotted text-ink",
       )}
     >
       <h2 className="text-[clamp(1.75rem,1.2rem+1.6vw,2.5rem)] leading-tight font-bold tracking-[-0.03em]">
@@ -54,7 +54,7 @@ export function TempoShowcase() {
         <div
           className={cn(
             "flex w-full flex-col gap-[0.5em] rounded-[0.35em] p-[0.6em] md:w-[14em]",
-            "border-[2.5px] border-ink bg-white text-ink shadow-[4px_4px_0_var(--ink)]",
+            "border-[2.5px] border-ink bg-surface text-ink shadow-[4px_4px_0_var(--ink)]",
           )}
         >
           <div className="flex items-baseline justify-between">
@@ -80,7 +80,7 @@ export function TempoShowcase() {
             onClick={toggle}
             className={cn(
               "press flex h-[1.4em] touch-manipulation rounded-[0.3em] border-2 border-ink items-center justify-center gap-[0.25em] text-[0.5em] font-semibold transition-colors max-md:h-11 max-md:text-[16px]",
-              "bg-ink text-white shadow-[2px_2px_0_var(--ink)]",
+              "bg-lit text-ink shadow-[2px_2px_0_var(--ink)]",
             )}
           >
             {playing ? <Pause className="size-[0.8em]" /> : <Play className="size-[0.8em]" />}

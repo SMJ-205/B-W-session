@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Check, Lock } from "lucide-react";
+import { Flame, Lock, Star } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { SheetMusic } from "@/components/music/sheet-music";
 import { Panel, Tile } from "./panel";
@@ -67,6 +67,7 @@ export function DashboardView() {
         <div className="lg:col-span-3">
           <Tile
             label="Streak"
+            icon={<Flame className="size-4 text-lit" fill="currentColor" aria-hidden="true" />}
             value={`${d.streak} hari`}
             caption={d.todayEntry ? `Hari ini sudah latihan di ${d.todayEntry.bpm} BPM` : "Hari ini belum latihan. Yuk!"}
           />
@@ -99,7 +100,7 @@ export function DashboardView() {
             </div>
             <div className="flex flex-col gap-5">
               <WeekStrip practice={state.practice} today={state.today} />
-              <Link href="/latihan" className={cn(buttonVariants({ size: "lg" }), "mt-auto w-full")}>
+              <Link href="/latihan" className={cn(buttonVariants({ variant: "accent", size: "lg" }), "mt-auto w-full")}>
                 {d.todayEntry ? "Latihan lagi" : "Ayo latihan"}
               </Link>
             </div>
@@ -119,9 +120,9 @@ export function DashboardView() {
                       className="flex items-start gap-2 text-[15px] leading-snug text-ink hover:underline"
                     >
                       {done ? (
-                        <Check className="mt-0.5 size-4 text-ink" aria-label="Selesai" />
+                        <Star className="mt-0.5 size-4 shrink-0 text-lit" fill="currentColor" aria-label="Selesai" />
                       ) : (
-                        <span className="mt-0.5 inline-block size-4 shrink-0 rounded-[5px] border-2 border-ink bg-white" aria-hidden="true" />
+                        <span className="mt-0.5 inline-block size-4 shrink-0 rounded-[5px] border-2 border-ink bg-surface" aria-hidden="true" />
                       )}
                       <span className={cn(done && "text-muted-foreground")}>{l.title}</span>
                     </Link>
@@ -157,15 +158,15 @@ export function DashboardView() {
                     href={`/lessons/${l.id}`}
                     className={cn(
                       "flex min-h-[63px] items-center gap-3 rounded-[14px] border-2 px-4 transition-colors",
-                      isNext ? "border-ink bg-hi shadow-[3px_3px_0_var(--ink)]" : "border-ink bg-white hover:bg-hi",
+                      isNext ? "border-ink bg-hi shadow-[3px_3px_0_var(--ink)]" : "border-ink bg-surface hover:bg-hi",
                     )}
                   >
                     <span className="tabular w-16 shrink-0 text-[13px] text-muted-foreground">Minggu {l.week}</span>
                     <span className="flex-1 text-[15px] text-ink">{l.title}</span>
                     {done ? (
-                      <Check className="size-4 text-ink" aria-label="Selesai" />
+                      <Star className="size-4 text-lit" fill="currentColor" aria-label="Selesai" />
                     ) : isNext ? (
-                      <span className="rounded-full border-2 border-ink bg-white px-2.5 py-0.5 text-[12px] font-bold text-ink">Selanjutnya</span>
+                      <span className="rounded-full border-2 border-ink bg-surface px-2.5 py-0.5 text-[12px] font-bold text-ink">Selanjutnya</span>
                     ) : null}
                   </Link>
                 </li>

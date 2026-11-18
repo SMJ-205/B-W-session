@@ -65,7 +65,7 @@ export function LoginForm() {
           placeholder="nama@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="h-12 w-full rounded-md border border-input bg-white px-3 text-[16px]"
+          className="h-12 w-full rounded-md border border-input bg-surface px-3 text-[16px]"
         />
         <Button type="submit" size="lg" className="w-full" disabled={loading}>
           {loading ? "Mengirim…" : "Kirim link masuk"}

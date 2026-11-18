@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Play } from "lucide-react";
+import { Play, Star } from "lucide-react";
 import { SheetMusic } from "@/components/music/sheet-music";
 import { VirtualKeyboard } from "@/components/music/virtual-keyboard";
 import { SEED_CURRICULUM } from "@/lib/curriculum/seed";
@@ -33,14 +33,14 @@ function Fragment({ stage }: { stage: number }) {
               <div
                 className={cn(
                   "h-9 w-full rounded-[10px] border-2 border-ink",
-                  i < 2 ? "bg-ink" : i === 2 ? "border-dashed bg-white" : "bg-hi",
+                  i < 2 ? "bg-oxblood" : i === 2 ? "border-dashed bg-surface" : "bg-hi",
                 )}
               />
               <span className="text-[12px] text-muted-foreground">{d}</span>
             </div>
           ))}
         </div>
-        <div className="mt-5 flex h-11 items-center justify-center gap-2 rounded-[14px] border-[2.5px] border-ink bg-ink text-[16px] font-bold text-white shadow-[3px_3px_0_var(--ink)]">
+        <div className="mt-5 flex h-11 items-center justify-center gap-2 rounded-[14px] border-[2.5px] border-ink bg-lit text-[16px] font-bold text-ink shadow-[3px_3px_0_var(--ink)]">
           <Play className="size-4" /> Mulai latihan
         </div>
       </div>
@@ -74,9 +74,9 @@ function Fragment({ stage }: { stage: number }) {
           .map((l, i) => (
             <li key={l.id} className="flex items-center gap-2">
               {i === 0 ? (
-                <Check className="size-4" />
+                <Star className="size-4 text-lit" fill="currentColor" />
               ) : (
-                <span className="inline-block size-4 rounded-[5px] border-2 border-ink bg-white" />
+                <span className="inline-block size-4 rounded-[5px] border-2 border-ink bg-surface" />
               )}
               {l.title}
             </li>
@@ -93,7 +93,7 @@ export function Stages() {
     <section id="cara" className="mx-3 mt-[clamp(88px,14vw,220px)] scroll-mt-4 sm:mx-4 md:mx-12">
       <div className="sticker overflow-hidden rounded-[24px]">
       <div className="grid md:min-h-[78svh] md:grid-cols-2">
-        <div className="order-2 flex flex-col bg-ink px-5 pt-10 pb-8 text-white md:order-1 md:px-12 md:pt-14">
+        <div className="order-2 flex flex-col bg-ink px-5 pt-10 pb-8 text-surface md:order-1 md:px-12 md:pt-14">
           <h2
             key={stage}
             className="animate-in fade-in text-[length:var(--step-head)] leading-[0.98] font-bold tracking-[-0.035em] duration-200"
@@ -112,7 +112,7 @@ export function Stages() {
         </div>
       </div>
 
-      <div className="border-t-[2.5px] border-ink bg-white px-5 pt-6 pb-7 md:px-12">
+      <div className="border-t-[2.5px] border-ink bg-surface px-5 pt-6 pb-7 md:px-12">
         <label htmlFor="stage-range" className="sr-only">
           Tahap sesi latihan
         </label>
@@ -137,7 +137,7 @@ export function Stages() {
                 aria-pressed={i === stage}
                 className={cn(
                   "press w-full rounded-[14px] border-2 border-ink px-3 py-2 text-left font-bold shadow-[2px_2px_0_var(--ink)]",
-                  i === stage ? "bg-ink text-white" : "bg-white text-ink hover:bg-hi",
+                  i === stage ? "bg-oxblood text-surface" : "bg-surface text-ink hover:bg-hi",
                 )}
               >
                 {s.name}

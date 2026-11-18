@@ -78,7 +78,7 @@ export function LessonView({ params }: { params: Promise<{ id: string }> }) {
 
       <div data-reveal className="mt-6 md:mt-8">
         {lesson.content_type === "interactive_sheet" && lesson.notation_data && (
-          <section className="-mx-4 border-y-[2.5px] border-ink bg-white px-4 py-5 sm:mx-0 sm:sticker sm:p-5">
+          <section className="-mx-4 border-y-[2.5px] border-ink bg-surface px-4 py-5 sm:mx-0 sm:sticker sm:p-5">
             <h2 className="sr-only">Partitur</h2>
             <NotationPlayer
               notation={lesson.notation_data}
@@ -89,14 +89,14 @@ export function LessonView({ params }: { params: Promise<{ id: string }> }) {
         )}
 
         {lesson.content_type === "text" && (
-          <section className="-mx-4 border-y-[2.5px] border-ink bg-white px-4 py-5 sm:mx-0 sm:sticker sm:p-5">
+          <section className="-mx-4 border-y-[2.5px] border-ink bg-surface px-4 py-5 sm:mx-0 sm:sticker sm:p-5">
             <h2 className="mb-4 text-[17px] font-bold text-ink">Coba di piano ini</h2>
             <VirtualKeyboard />
           </section>
         )}
 
         {lesson.content_type === "quiz" && lesson.quiz && (
-          <section className="-mx-4 border-y-[2.5px] border-ink bg-white px-4 py-5 sm:mx-0 sm:sticker sm:p-5 max-w-[820px] md:p-6">
+          <section className="-mx-4 border-y-[2.5px] border-ink bg-surface px-4 py-5 sm:mx-0 sm:sticker sm:p-5 max-w-[820px] md:p-6">
             <h2 className="mb-5 text-[17px] font-bold text-ink">
               {lesson.quiz.length} pertanyaan. Jawab semuanya dengan benar untuk lulus.
             </h2>

@@ -42,9 +42,9 @@ export function WeekTimeline({ curriculum, starts, actualWeek, planWeek }: WeekT
                         title={`Minggu ${w}`}
                         className={cn(
                           "key-shape h-full border-2 border-ink transition-colors",
-                          w < actualWeek && "bg-ink",
+                          w < actualWeek && "bg-oxblood",
                           w === actualWeek && "bg-lit",
-                          w > actualWeek && "bg-white group-hover:bg-hi",
+                          w > actualWeek && "bg-surface group-hover:bg-hi",
                         )}
                       />
                     </div>
@@ -67,7 +67,7 @@ export function WeekTimeline({ curriculum, starts, actualWeek, planWeek }: WeekT
       </div>
       <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-muted-foreground">
         <li className="flex items-center gap-1.5">
-          <span className="key-shape inline-block h-3 w-2 border border-ink bg-ink" /> Sudah lewat
+          <span className="key-shape inline-block h-3 w-2 border border-ink bg-oxblood" /> Sudah lewat
         </li>
         <li className="flex items-center gap-1.5">
           <span className="key-shape inline-block h-3 w-2 border border-ink bg-lit" /> Minggu ini

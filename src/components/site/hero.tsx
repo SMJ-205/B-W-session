@@ -60,13 +60,13 @@ export function Hero() {
             priority={i === 0}
             sizes="(min-width: 768px) 50vw, 100vw"
             className={cn(
-              "drift object-cover grayscale transition-opacity duration-[1600ms]",
+              "drift object-cover saturate-[.8] sepia-[.25] transition-opacity duration-[1600ms]",
               i === photo ? "opacity-100" : "opacity-0",
             )}
           />
         ))}
         <figcaption className="absolute top-3 left-3 md:top-auto md:bottom-5 md:left-5">
-          <span className="inline-block rounded-full border-2 border-ink bg-white px-3 py-1 text-[13px] font-bold text-ink">
+          <span className="inline-block rounded-full border-2 border-ink bg-surface px-3 py-1 text-[13px] font-bold text-ink">
             {PHOTOS[photo].caption}
           </span>
         </figcaption>
@@ -79,7 +79,7 @@ export function Hero() {
           active={pitch}
           onPress={press}
           className="h-[84px] shrink-0 border-b-[2.5px] border-ink md:h-[132px]"
-          whiteClass="bg-white border-x border-ink"
+          whiteClass="bg-surface border-x border-ink"
           blackClass="bg-ink"
         />
 
@@ -102,12 +102,12 @@ export function Hero() {
           </h1>
           <p className="mt-6 max-w-[38ch] text-[length:var(--step-body)] leading-[1.55] md:mt-8">
             <span className="inline-flex items-baseline gap-1.5 font-bold">
-              <BrandMark className="size-6 self-center" /> Notes of Nopia
+              <BrandMark className="size-6 self-center" paper="var(--surface)" /> Notes of Nopia
             </span>{" "}
             mengajak kamu belajar piano sedikit demi sedikit, cukup 15 menit sehari. Tekan tuts di atas, dengarkan
             bunyinya, lalu lihat namanya.
           </p>
-          <Link href="/dashboard" className={cn(buttonVariants({ size: "lg" }), "mt-6 md:mt-8")}>
+          <Link href="/dashboard" className={cn(buttonVariants({ variant: "accent", size: "lg" }), "mt-6 md:mt-8")}>
             Ayo mulai!
           </Link>
         </div>

@@ -3,10 +3,12 @@
 @import "shadcn/tailwind.css";
 
 /*
- * Gaya "stiker": kartu dan tombol putih bergaris tepi tebal dengan bayangan
- * pekat bergeser, di atas latar abu berpola titik. Hanya hitam, putih, abu.
- * Nama token lama (oxblood, paper) dipertahankan agar komponen tidak berubah;
- * nilainya sekarang monokrom. `oxblood` = aksen (hitam), `lit` = sorotan.
+ * Gaya "stiker": kartu dan tombol bergaris tepi tebal dengan bayangan pekat
+ * bergeser, di atas latar ivory berpola titik.
+ * Tema "Ivory & Warm Charcoal": ivory untuk latar, charcoal/ebony untuk teks dan
+ * garis, mahogany untuk tombol dan navigasi aktif, brass untuk sorotan kecil.
+ * Nama token lama dipertahankan agar komponen tidak berubah:
+ * `oxblood` = mahogany (aksen utama), `oxblood-soft` = walnut, `lit` = brass.
  */
 
 @theme inline {
@@ -43,6 +45,7 @@
   --color-hi: var(--hi);
   --color-lit: var(--lit);
   --color-dots: var(--dots);
+  --color-surface: var(--surface);
 
   --radius-sm: 4px;
   --radius-md: 6px;
@@ -51,31 +54,32 @@
 }
 
 :root {
-  /* Monokrom */
-  --ink: #111111;
-  --paper: #ededed;
-  --paper-2: #dcdcdc;
-  --oxblood: #111111;
-  --oxblood-soft: #555555;
-  --chrome: #e9e9e9;
-  --panel: #f5f5f5;
-  --dots: #d0d0d0;
-  /* Sorotan: tuts menyala, pilihan aktif, badge */
-  --hi: #dedede;
-  --lit: #8f8f8f;
+  /* Ivory & Warm Charcoal */
+  --ink: #2c2a29; /* charcoal / ebony: teks dan garis */
+  --surface: #faf8f5; /* ivory terang: kartu */
+  --paper: #f4f1ea; /* ivory: latar */
+  --paper-2: #e9e3d6;
+  --oxblood: #8b5a2b; /* warm mahogany: tombol dan navigasi aktif */
+  --oxblood-soft: #5c4033; /* walnut */
+  --chrome: #f4f1ea;
+  --panel: #faf8f5;
+  --dots: #e2dacb;
+  /* Sorotan */
+  --hi: #efe6d6; /* tint hangat untuk chip dan baris terpilih */
+  --lit: #d4af37; /* warm gold / brass: tuts menyala, streak, bintang */
 
-  --background: #ffffff;
+  --background: var(--surface);
   --foreground: var(--ink);
-  --card: #ffffff;
+  --card: var(--surface);
   --card-foreground: var(--ink);
-  --popover: #ffffff;
+  --popover: var(--surface);
   --popover-foreground: var(--ink);
-  --primary: var(--ink);
-  --primary-foreground: #ffffff;
-  --secondary: #ffffff;
+  --primary: var(--oxblood);
+  --primary-foreground: var(--surface);
+  --secondary: var(--surface);
   --secondary-foreground: var(--ink);
   --muted: var(--panel);
-  --muted-foreground: #5c5c5c;
+  --muted-foreground: #6b625a;
   --accent: var(--panel);
   --accent-foreground: var(--ink);
   --destructive: #b42318;
@@ -108,8 +112,8 @@
     font-feature-settings: "tnum" 0;
   }
   ::selection {
-    background: var(--ink);
-    color: #ffffff;
+    background: var(--oxblood);
+    color: var(--surface);
   }
   :focus-visible {
     outline: 3px solid var(--lit);
@@ -123,13 +127,13 @@
 
 /* Kartu stiker: garis tepi tebal + bayangan pekat bergeser */
 @utility sticker {
-  background: #ffffff;
+  background: var(--surface);
   border: 2.5px solid var(--ink);
   border-radius: 20px;
   box-shadow: 4px 4px 0 var(--ink);
 }
 @utility sticker-sm {
-  background: #ffffff;
+  background: var(--surface);
   border: 2px solid var(--ink);
   border-radius: 14px;
   box-shadow: 3px 3px 0 var(--ink);

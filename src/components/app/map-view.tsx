@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Check, Lock } from "lucide-react";
+import { Lock, Star } from "lucide-react";
 import { useLearner } from "./use-learner";
 import { TIERS } from "@/lib/curriculum/types";
 import { cn } from "@/lib/utils";
@@ -94,9 +94,9 @@ export function MapView() {
                             const row = (
                               <>
                                 {lessonDone ? (
-                                  <Check className="size-4 shrink-0 text-ink" aria-label="Selesai" />
+                                  <Star className="size-4 shrink-0 text-lit" fill="currentColor" aria-label="Selesai" />
                                 ) : (
-                                  <span className="inline-block size-4 shrink-0 rounded-[5px] border-2 border-ink bg-white" aria-hidden="true" />
+                                  <span className="inline-block size-4 shrink-0 rounded-[5px] border-2 border-ink bg-surface" aria-hidden="true" />
                                 )}
                                 <span className="flex-1">{l.title}</span>
                                 {l.content_type === "quiz" && <span className="text-[13px] text-muted-foreground">Kuis</span>}

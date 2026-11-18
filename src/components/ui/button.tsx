@@ -8,9 +8,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "press border-[2.5px] border-ink bg-ink text-white shadow-[3px_3px_0_var(--ink)]",
-        accent: "press border-[2.5px] border-ink bg-ink text-white shadow-[3px_3px_0_var(--ink)]",
-        secondary: "press border-[2.5px] border-ink bg-white text-ink shadow-[3px_3px_0_var(--ink)] hover:bg-hi",
+        default: "press border-[2.5px] border-ink bg-oxblood text-surface shadow-[3px_3px_0_var(--ink)] hover:bg-oxblood-soft",
+        accent: "press border-[2.5px] border-ink bg-lit text-ink shadow-[3px_3px_0_var(--ink)] hover:bg-[#c9a22c]",
+        secondary: "press border-[2.5px] border-ink bg-surface text-ink shadow-[3px_3px_0_var(--ink)] hover:bg-hi",
         ghost: "text-ink hover:bg-hi",
         link: "text-ink underline underline-offset-4",
       },

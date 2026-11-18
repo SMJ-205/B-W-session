@@ -18,8 +18,8 @@ interface SheetMusicProps {
   className?: string;
 }
 
-const ACTIVE_COLOR = "#8f8f8f"; // abu sorotan
-const INK_COLOR = "#111111";
+const ACTIVE_COLOR = "#8b5a2b"; // mahogany: not yang sedang dimainkan
+const INK_COLOR = "#2c2a29";
 
 /** Ketukan (dalam quarter note) per birama, mis. "3/4" -> 3, "6/8" -> 3. */
 function beatsPerMeasure(timeSignature: string): number {
@@ -110,7 +110,10 @@ export function SheetMusic({
       measures.forEach((measure, mi) => {
         const col = mi % perRow;
         const row = Math.floor(mi / perRow);
-        const measureWidth = (width - 2) / Math.min(perRow, measures.length);
+        // Baris terakhir yang tidak penuh direntangkan selebar container,
+        // supaya tidak ada birama yang tertinggal sendirian dengan ruang kosong.
+        const inThisRow = Math.min(perRow, measures.length - row * perRow);
+        const measureWidth = (width - 2) / inThisRow;
         const stave = new VF.Stave(1 + col * measureWidth, row * rowHeight, measureWidth);
         if (col === 0) stave.addClef(clef);
         if (mi === 0) stave.addTimeSignature(timeSignature);
@@ -178,7 +181,7 @@ export function SheetMusic({
   }
 
   return (
-    <div className={cn("w-full overflow-hidden bg-white", className)}>
+    <div className={cn("w-full overflow-hidden bg-surface", className)}>
       <div ref={containerRef} className="w-full" aria-label="Notasi balok" />
       {error && <p className="text-sm text-destructive">Partitur gagal ditampilkan: {error}</p>}
     </div>

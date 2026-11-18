@@ -46,7 +46,7 @@ export function LevelList() {
         </div>
         <figure data-reveal style={{ "--i": 2 } as React.CSSProperties}>
           <video
-            className="sticker aspect-video w-full rounded-[24px] bg-ink object-cover grayscale"
+            className="sticker aspect-video w-full rounded-[24px] bg-ink object-cover saturate-[.8] sepia-[.25]"
             src="/media/square-piano-loop.webm"
             poster="/media/square-piano-poster.jpg"
             autoPlay
@@ -89,7 +89,7 @@ export function LevelList() {
                     height={88}
                     sizes="64px"
                     style={{ objectPosition: b.pos }}
-                    className="h-[88px] w-[60px] shrink-0 rounded-[12px] border-2 border-ink object-cover grayscale md:w-16"
+                    className="h-[88px] w-[60px] shrink-0 rounded-[12px] border-2 border-ink object-cover saturate-[.8] sepia-[.25] md:w-16"
                   />
                   <div className="min-w-0 flex-1">
                     <p className="flex items-baseline justify-between gap-3 text-[17px] font-bold text-oxblood">

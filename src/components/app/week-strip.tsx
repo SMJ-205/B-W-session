@@ -22,8 +22,8 @@ export function WeekStrip({ practice, today }: { practice: PracticeEntry[]; toda
                 title={bpm ? `${d}: ${bpm} BPM` : d}
                 className={cn(
                   "h-10 w-full rounded-[10px] border-2 border-ink",
-                  bpm ? "bg-ink" : d > today ? "bg-white" : "bg-hi",
-                  isToday && !bpm && "border-dashed bg-white",
+                  bpm ? "bg-oxblood" : d > today ? "bg-surface" : "bg-hi",
+                  isToday && !bpm && "border-dashed bg-surface",
                 )}
               />
               <span className={cn("text-[12px]", isToday ? "font-bold text-ink" : "text-muted-foreground")}>
