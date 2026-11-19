@@ -71,9 +71,9 @@ export function KeyBand({
               type={interactive ? "button" : undefined}
               style={{ left: `${left}%`, width: `calc(${100 / whites}% - 4px)` }}
               className={cn(
-                "key-shape absolute top-0 h-full transition-[background-color,transform] duration-150",
-                isActive ? "translate-y-[3px] bg-lit" : whiteClass,
-                interactive && "cursor-pointer hover:brightness-95 active:translate-y-[3px]",
+                "key-shape absolute top-0 h-full transition-colors duration-100",
+                isActive ? "bg-lit" : whiteClass,
+                interactive && "cursor-pointer touch-manipulation hover:brightness-95",
               )}
             />
           );
@@ -87,9 +87,9 @@ export function KeyBand({
             type={interactive ? "button" : undefined}
             style={{ left: `${left}%`, width: `${(100 / whites) * 0.56}%` }}
             className={cn(
-              "key-shape absolute top-0 z-10 h-[62%] transition-[background-color,transform] duration-150",
-              isActive ? "translate-y-[3px] bg-lit" : blackClass,
-              interactive && "cursor-pointer active:translate-y-[3px]",
+              "key-shape absolute top-0 z-10 h-[62%] transition-colors duration-100",
+              isActive ? "bg-lit" : blackClass,
+              interactive && "cursor-pointer touch-manipulation",
             )}
           />
         );
